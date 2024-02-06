@@ -22,7 +22,140 @@ Problems Titles :
 20.Simple Statistics
 21.Existence
 22.Cutting Recipes
+23.Chef and Interview
+24.Little elephant and divisors
 
+
+
+Little Elephant and Divisors 
+------------------------------
+#include <stdio.h>
+#include <math.h>
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int getFactor(int x) {
+    for (int i = 2; i * i <= x; i++) {
+        if (x % i == 0) {
+            return i;
+        }
+    }
+    return x;
+}
+
+int main() {
+    int tt;
+    scanf("%d", &tt);
+    while (tt--) {
+        int n;
+        scanf("%d", &n);
+        int a[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
+        }
+      
+        int g = a[0];
+        for (int i = 1; i < n; i++) {
+            g = gcd(a[i], g);
+        }
+        int factor = getFactor(g);
+        printf("%d\n", factor > 1 ? factor : -1);
+    }
+    return 0;
+}
+
+
+
+Chef and Interview(java)
+-------------------
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	
+	private static FastReader in;
+	
+	public static void main(String[] args) {
+		in = new FastReader();
+		int tc = 1;
+		tc = in.nextInt();
+		for(int t = 0; t < tc; t++) {
+			new Solver();
+		}
+	}
+	static class Solver { 
+		Solver() {
+			int n = in.nextInt();
+			ArrayList<Integer> divisors = new ArrayList<Integer>();
+			for(int i = 1; i <= (int) Math.sqrt(n); i++) {
+				if(n % i == 0) {
+					divisors.add(i);
+					int otherDivisor = n / i;
+					if(otherDivisor != i) {
+						divisors.add(otherDivisor);
+					}
+				}
+			}
+			
+	
+			long sum = 0;
+			for(Integer x : divisors) {
+				sum += x;
+			}
+			
+
+			System.out.println(sum);
+		}
+	}
+	static class FastReader {
+		BufferedReader br;
+		StringTokenizer st;
+		
+		public FastReader() {
+			br = new BufferedReader(new InputStreamReader(System.in));
+		}
+		
+		String next() {
+			while(st == null || !st.hasMoreElements()) {
+				try {
+					st = new StringTokenizer(br.readLine());
+				} catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+			return st.nextToken();
+		}
+		
+		int nextInt() {
+			return Integer.parseInt(next());
+		}
+		
+		long nextLong() {
+			return Long.parseLong(next());
+		}
+		
+		double nextDouble() {
+			return Double.parseDouble(next());
+		}
+		
+		String nextLine() {
+			String str = "";
+			try {
+				str = br.readLine();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+			return str;
+}
+}
+}
 Cutting Recipes
 ----------------
 #include <stdio.h>
@@ -688,5 +821,4 @@ int main() {
 
     return 0;
 }
-
 
