@@ -24,7 +24,408 @@ Problems Titles :
 22.Cutting Recipes
 23.Chef and Interview
 24.Little elephant and divisors
+25.Number of Factors
+26.Little Elephant and Divisors
+27.Chef and String
+28.Evacuate to Moon
+29.Maximize Disjoint Pair sum
+30.Maximum Weight difference
+31.Watson asks Does permutation Exist
+32.Snakes, Mongooses and the Ultimate Election
+33.K-flip
 
+Zonal Computing Olympiad 2015, 29 Nov 2014
+---------------------------------------------
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+struct Interval {
+    int start, end;
+};
+
+bool compareIntervals(const Interval& a, const Interval& b) {
+    return a.end < b.end;
+}
+
+int smallestSetSize(std::vector<Interval>& intervals) {
+    std::sort(intervals.begin(), intervals.end(), compareIntervals);
+
+    int setSize = 0;
+    int currentEnd = -1;
+
+    for (const auto& interval : intervals) {
+        if (interval.start > currentEnd) {
+            setSize++;
+            currentEnd = interval.end;
+        }
+    }
+
+    return setSize;
+}
+
+int main() {
+    int N;
+    std::cin >> N;
+
+    std::vector<Interval> intervals(N);
+    for (int i = 0; i < N; ++i) {
+        std::cin >> intervals[i].start >> intervals[i].end;
+    }
+
+    int result = smallestSetSize(intervals);
+
+    std::cout << result << std::endl;
+
+    return 0;
+}
+
+
+
+K-flip
+----------------
+#include <stdio.h>
+#include <string.h>
+char setd[100001];
+long long int arr[200001], N, K, don;
+void dip_1() {
+    scanf("%lld %lld", &N, &K);
+    don = 0;
+    for (int i = 1; i <= N; i++) {
+        scanf(" %c", &setd[i]); 
+    memset(arr, 0, sizeof(arr));
+
+    for (int i = 1; i <= N - K + 1; i++) {
+        if ((setd[i] + don) % 2 == 1) {
+            don++;
+            arr[i + K - 1] = 1;
+        }
+        don -= arr[i];
+        setd[i] = '0'; 
+    }
+
+    for (int i = N - K + 2; i <= N; i++) {
+        setd[i] = '0' + (setd[i] + don) % 2;
+        don -= arr[i];
+    }
+    for (int i = 1; i <= N; i++) {
+        printf("%c", setd[i]);
+    }
+
+    printf("\n");
+}
+
+int main() {
+    int za;
+    scanf("%d", &za);
+
+    while (za--) {
+        dip_1();
+    }
+
+    return 0;
+}
+
+
+
+Snakes, Mongooses and the Ultimate Election
+-----------------------------------------------
+#include<bits/stdc++.h>
+#define pi                  acos(-1)
+#define READ                freopen("in.txt", "r", stdin)
+#define WRITE               freopen("out.txt", "w", stdout)
+#define INF                 1000000000000000000
+#define dist(ax,ay,bx,by)   sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by))
+#define M                   1000000
+#define gcd(a,b)            __gcd(a,b)
+#define lcm(a,b)            (a*b)/__gcd(a,b)
+#define m_p(a,b)            make_pair(a,b)
+#define pb                  push_back
+#define pf                  printf
+#define sf                  scanf
+
+using namespace std;
+typedef unsigned long long llu;
+typedef long long lli;
+typedef long double ld;
+
+using namespace std;
+int main()
+{
+    string a;
+    stack<char>s;
+    stack<char>s1;
+    lli p,i;
+    cin>>p;
+    bool mark=true;
+    while(p--)
+    {
+cin>>a;
+        mark=true;
+        for(i=0; i<a.size(); i++)
+        {
+            if(a[i]=='m'&&a[i+1]=='s'&&mark)
+            {
+                mark=false;
+                swap(a[i],a[i+1]);
+            }
+            if(a[i]=='s')
+            {
+           s.push('s');
+            }
+            else
+            {
+                mark=true;
+
+                if(!s.empty()&&a[i-1]=='s') s.pop();
+                s1.push('m');
+            }
+        }
+        if(s.size()>s1.size()) cout<<"snakes";
+        else  if(s.size()<s1.size()) cout<<"mongooses";
+        else cout<<"tie";
+        cout<<endl;
+        while(!s.empty())
+            s.pop();
+        while(!s1.empty())
+            s1.pop();
+}
+
+}
+
+watson asks Does permutation Exist
+-------------------------------------
+#include<iostream>
+#include<stdlib.h>
+#include<algorithm>
+using namespace std;
+typedef long long int ll;
+int main()
+{
+ int t,flag;
+ ll n,*arr,i;
+ cin>>t;
+ while(t--) }
+}
+ {
+ cin>>n;
+ arr=(ll *)malloc(sizeof(ll)*n);
+ for(i=0;i<n;i++)
+ {
+ cin>>arr[i];
+ }
+ sort(arr,arr+n);
+ flag=0;
+ for(i=1;i<n;i++)
+ {
+ if(arr[i]-arr[i-1]>1)
+ {
+ flag=1;
+ break;
+ }
+ }
+ if(flag==0)
+ {
+ cout<<"YES\n";
+ }
+ else
+ {
+ cout<<"NO\n";
+ }
+ }
+}
+
+
+Maximum Weight difference
+-----------------------------
+for _ in range(int(input())):
+    N,K=map(int,input().split())
+    w=list(map(int,input().split()))
+    w.sort()
+    son=sum(w[:K])
+    dad=sum(w[K:])
+    first=dad-son
+    w.reverse()
+    min=sum(w[:K])
+    max=sum(w[K:])
+    sec=min-max
+    if first<sec:
+        print(sec)
+    else:
+        print(first)
+
+
+Maximize Disjoint pair sum
+-----------------------------
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	int tt;
+	cin >> tt;
+	while (tt--) {
+		int n, d;
+		cin >> n >> d;
+		vector<int> a(n);
+		for (int i = 0; i < n; i++) {
+			cin >> a[i];
+		}
+		sort(a.begin(), a.end());
+		long long ans = 0;
+		for (int i = n - 1; i - 1 >= 0; ) {
+			if (a[i] - a[i - 1] < d) {
+				ans += (a[i] + a[i - 1]);
+				i -= 2;
+			} else {
+				i--;
+			}
+		}
+		cout << ans << '\n';
+	}
+	return 0;
+}
+
+Evacuate to Moon
+---------------------
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+   long long n,m,h;
+   cin>>n>>m>>h;
+   long long int A[n],B[m];
+   int c1=0,c2=0,co=0,c3=0;
+   for(int i=0;i<n;i++)
+   cin>>A[i];
+   for(int i=0;i<m;i++)
+   cin>>B[i];
+   sort(A,A+n,greater<long long>());
+   sort(B,B+m,greater<long long>());
+   long long ans=0;
+   for(int i=0;i<min(m,n);i++)
+   {
+      ans+=min(A[i],B[i]*h);
+   }
+   cout<<ans<<endl;
+    }}
+chef and String
+------------------
+#include <stdio.h>
+#include <string.h>
+int main() {
+    int t;
+    scanf("%d", &t);
+    while (t--) {
+        int ans1 = 0;
+        char s[100000];
+        scanf("%s", s);
+        int n = strlen(s);
+        for (int i = 1; i < n; i++) {
+            if (s[i] != s[i - 1]) {
+                ans1++;
+                i++;
+            }
+        }
+        printf("%d\n", ans1);
+    }
+    return 0;
+}
+
+Little Elephant and Divisors
+---------------------------------
+#include <stdio.h>
+#include <math.h>
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+int getFactor(int x) {
+    for (int i = 2; i * i <= x; i++) {
+        if (x % i == 0) {
+            return i;
+        }
+    }
+    return x;
+}
+int main() {
+    int tt;
+    scanf("%d", &tt);
+    while (tt--) {
+        int n;
+        scanf("%d", &n);
+        int a[n];
+        for (int i = 0; i < n; i++) {
+            scanf("%d", &a[i]);
+        }
+        int g = a[0];
+        for (int i = 1; i < n; i++) {
+            g = gcd(a[i], g);
+        }
+        int factor = getFactor(g);
+        printf("%d\n", factor > 1 ? factor : -1);
+    }
+    return 0;
+}
+
+
+Number of factors
+---------------------------
+const MAX = 1000001;
+function countFactors(n) {
+    let factors = new Array(MAX).fill(0);
+    
+    for (let i = 2; i * i <= n; ++i) {
+        while (n % i === 0) {
+            factors[i]++;
+            n /= i;
+        }
+    }
+    
+    if (n > 1) {
+        factors[n]++;
+    }
+    
+    let count = 1;
+    for (let i = 2; i < MAX; ++i) {
+        if (factors[i] > 0) {
+            count *= (factors[i] + 1);
+        }
+    }
+    
+    return count;
+}
+function main() {
+    const readline = require('readline');
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    rl.question("Enter the number of test cases: ", function(t) {
+        t = parseInt(t);
+        let testCase = 0;
+        rl.question("Enter the values for each test case separated by space: ", function(input) {
+            let values = input.split(' ').map(Number);
+            for (let i = 0; i < t; ++i) {
+                let n = values[testCase++];
+                let product = 1;
+                for (let j = 0; j < n; ++j) {
+                    let a = values[testCase++];
+                    product *= a;
+                }
+                console.log(countFactors(product));
+            }
+            rl.close();
+        });
+    });
+}
+main();
 
 
 Little Elephant and Divisors 
