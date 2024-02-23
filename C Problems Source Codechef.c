@@ -37,7 +37,91 @@ Problems Titles :
 35. The Wave
 36.Shoekand and Number
 37.Minion Chef and Banana
-38.
+38.Snake Eating
+39.
+Snake Eating
+------------------
+
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define FOR(i,a,b) for(int i=a;i<b;i++)
+#define FORD(i,a,b) for(int i=a;i>=b;i--)
+#define REP(i,n) FOR(i,0,n)
+#define PB push_back
+#define ITER(i,a) for( typeof(a.begin()) i=a.begin();i!=a.end();i++)
+#define mod 1000000007
+#define MAXN 1000010
+#define MEM(a,b) memset(a,(b),sizeof(a))
+#define MP make_pair
+#define INF mod
+
+typedef vector<int> VI;
+typedef long long LL;
+typedef list<int> LI;
+LL N, Q;
+LL BS( LL arr[] , LL X )
+{
+	LL lo = 0, hi = N-1, mid;
+	while( lo < hi ){
+ 
+		mid = lo + (hi-lo+1)/2;
+ 
+		if( arr[mid] < X )
+			lo = mid+1;
+ 
+		else
+			hi = mid;
+	}
+	return lo ;
+} 
+LL BS_extra( LL arr[], LL X , LL idx ) 
+{
+	LL lo = 0, hi = idx, mid;
+	LL found = 0;
+	while( lo <= hi ){ 
+		mid =( lo + hi)/2;
+		if( X*(idx-mid+1) - (arr[mid] - arr[idx+1]) > mid )
+			lo = mid+1;
+		else{
+			if( found == 1 && hi==lo)break;
+			hi = mid;
+			found = 1;
+		}
+	}
+	if( found == 1 )return idx-lo+1;
+	else return 0;
+}
+int main()
+{
+	LL TC;
+	scanf("%lld",&TC);
+	while( TC-- ){ 
+		scanf("%lld %lld",&N,&Q);
+		LL arr[N];
+		REP(i,N)
+		scanf("%lld",&arr[i]); 
+		sort(arr, arr+N);
+		LL sum[N+1];
+		sum[N] = 0;
+		sum[N-1] = arr[N-1];
+		for( int i=N-2; i>=0; i-- )
+			sum[i] = sum[i+1] + arr[i];
+		while( Q-- ){
+			LL K; LL ans = 0;
+			scanf("%lld",&K);
+ 
+			if( K <= arr[0] )
+				ans = N;
+			else{
+				 int index= lower_bound(arr,arr+N,K)-arr;
+				ans += N-index;
+				ans += BS_extra(sum,K,index-1);
+			}
+			printf("%lld\n",ans);
+	}
+}
+ 
 
 Minion Chef and Banana
 -----------------------
