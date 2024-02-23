@@ -33,6 +33,177 @@ Problems Titles :
 31.Watson asks Does permutation Exist
 32.Snakes, Mongooses and the Ultimate Election
 33.K-flip
+34.Coins and Triangle
+35. The Wave
+36.Shoekand and Number
+37.Minion Chef and Banana
+38.
+
+Minion Chef and Banana
+-----------------------
+#include <stdio.h>
+
+int can_finish_all_bananas(int N, int H, int piles[]) {
+    int max_bananas = 0;
+    for (int i = 0; i < N; i++) {
+        if (piles[i] > max_bananas) {
+            max_bananas = piles[i];
+        }
+    }
+    
+    int left = 1, right = max_bananas;
+    while (left < right) {
+        int mid = (left + right) / 2;
+        int hours = 0;
+        for (int i = 0; i < N; i++) {
+            hours += (piles[i] + mid - 1) / mid;
+        }
+        if (hours <= H) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    while (T-- > 0) {
+        int N, H;
+        scanf("%d %d", &N, &H);
+        int piles[N];
+        for (int i = 0; i < N; i++) {
+            scanf("%d", &piles[i]);
+        }
+        int result = can_finish_all_bananas(N, H, piles);
+        printf("%d\n", result);
+    }
+    return 0;
+}
+
+
+Shoekand and number
+--------------------
+#include <stdio.h>
+#include <math.h>
+int main(void) {
+	int t;
+	scanf("%d",&t);
+	while(t--){
+	    int n;
+	    scanf("%d",&n);
+	    int n1=n;
+	    int ct=0;
+	    while(n!=0){
+	        n=n/2;
+	        ct++;
+	    }
+	    int a= pow(2,0) + pow(2,ct-1);
+	    int min = abs(a-n1);
+	    for(int i=1;i<ct-1;i++){
+	        
+	        int x = pow(2,i) + pow(2,ct-1);
+	        int y = abs(n1-x);
+	        if(min>y){
+	            min=y;
+	        }
+	    }
+	    int a1 = pow(2,0) + pow(2,ct);
+	    int min1 = abs(a1-n1);
+	    if(n1==1){
+	        printf("2\n");
+	    }
+	    else if(min1>min){
+	        printf("%d\n",min);
+	    }
+	    else if(n1==1){
+	        printf("2\n");
+	    }
+	    else {
+	        printf("%d\n",min1);
+	    }
+	}
+
+}
+
+The Wave
+-------------------
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int binary_search(int arr[], int n, int x) {
+    int low = 0;
+    int high = n - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == x) {
+            return mid; 
+        } else if (arr[mid] > x) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    sort(arr, arr + n);
+
+    for (int i = 0; i < q; i++) {
+        int x;
+        cin >> x;
+        int pos = binary_search(arr, n, x);
+        if (pos != -1) {
+            cout << "0" << endl;
+        } else {
+            int greater_count = upper_bound(arr, arr + n, x) - arr;
+            if (greater_count % 2 == 0) {
+                cout << "POSITIVE" << endl;
+            } else {
+                cout << "NEGATIVE" << endl;
+            }
+        }
+    }
+    return 0;
+}
+
+Coins and Triangle
+--------------------
+#include <stdio.h>
+
+int main() {
+    int t, c;
+    scanf("%d", &t);
+    for (int i = 0; i < t; i++) {
+        scanf("%d", &c);
+        int count = 0;
+        int j = 1;
+        while (c > 0) {
+            c -= j;
+            if(c<0)
+            break;
+            else
+            {
+            count++;
+            j++;
+            }
+        }
+        printf("%d\n", count);
+    }
+    return 0;}
 
 Zonal Computing Olympiad 2015, 29 Nov 2014
 ---------------------------------------------
