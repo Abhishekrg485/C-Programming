@@ -39,6 +39,68 @@ Problems Titles :
 37.Minion Chef and Banana
 38.Snake Eating
 39.Forest Gathering
+40.Squirrel and chestnut
+41.
+
+
+Squirrel and chestnut
+-------------------------
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+typedef long long ll;
+bool check(ll mid, const vector<ll>& a, const vector<ll>& b, int n, int m, int k) {
+    vector<ll> c(m);
+    for (int i = 0; i < m; ++i) {
+        if (mid < a[i]) {
+            c[i] = 0;
+        } else {
+            c[i] = max(0LL, (mid - a[i] + b[i]) / b[i]);
+        }
+    }
+    sort(c.begin(), c.end(), greater<ll>());
+    ll ans = 0;
+    for (int i = 0; i < min(n, m); ++i) {
+        ans += c[i];
+        if (ans >= k) {
+            return true;
+        }
+    }
+    return false;
+}
+ll minimizeMax(ll low, ll high, const vector<ll>& a, const vector<ll>& b, int n, int m, int k) {
+    ll result = high;
+    while (low <= high) {
+        ll mid = low + (high - low) / 2;
+        if (check(mid, a, b, n, m, k)) {
+            result = mid;
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    return result;
+}
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int m, n, k;
+        cin >> m >> n >> k;
+        vector<ll> a(m), b(m);
+        for (int i = 0; i < m; ++i) {
+            cin >> a[i];
+        }
+        for (int i = 0; i < m; ++i) {
+            cin >> b[i];
+        }
+        ll low = 1, high = 1e18;
+        ll result = minimizeMax(low, high, a, b, n, m, k);
+        cout << result << endl;
+    }
+    return 0;
+}
 
 Forest Gathering
 ----------------
