@@ -41,7 +41,908 @@ Problems Titles :
 39.Snake Eating
 40.Forest Gathering
 41.Squirrel and chestnut
-42.
+42.Minimize the Maximum
+43.Circular intervals
+44.Flu Shot Lineup
+45.Binary Substitution
+46.Magic Rankings
+47.Count Palindromes
+48.Barcelona Gamplay Tactics
+49.Alternating subarray prefix
+50.Count Subarrays
+51.Event Organizer
+52.SUPW Zonal Computing Olympiad 2014, 30 Nov 2013
+53.IPL Zonal Computing Olympiad 2014, 30 Nov 2013
+54.Maximal crosses
+
+
+54.Maximal crosses
+----------------------
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+int main() {
+	// your code goes here
+		int k;
+	cin>>k;
+	while(k--) {
+	    ll n;
+	    cin>>n;
+	    double t;
+	    cin>>t;
+	    double dist[n];
+	    double ans=0.0;
+	    
+	    for(int i=0;i<n;i++) {
+	        cin>>dist[i];
+	    }
+	    
+	    double l=0.0,r=n*t;
+	    
+	    while(l<=r) {
+	        double mid= (l+r)/2;
+	        double lastele=max(0.0,dist[0]-mid);
+	        double curr=0.0;
+	        bool found=1;
+	        for(int i=1;i<n;i++) {
+	            curr=max(lastele+t,dist[i]-mid);
+	            lastele=curr;
+	            if(curr>dist[i]+mid) {
+	                found=0;
+	                break;
+	            }
+	        }
+	        if(found) {
+	            ans=mid;
+	            r=mid-0.00001;
+	        }
+	        else l=mid+0.00001;
+	    }
+	    cout<<fixed<<setprecision(4)<<ans<<endl;
+	}
+	return 0;
+}
+53.IPL Zonal Computing Olympiad 2014, 30 Nov 2013
+-------------------------------------------------
+#define _CRT_SECURE_NO_WARNINGS
+#include <map> 
+#include <set> 
+#include <cmath> 
+#include <queue> 
+#include <vector> 
+#include <string> 
+#include <cstdio> 
+#include <cstdlib> 
+#include <cstring> 
+#include <cassert> 
+#include <numeric> 
+#include <algorithm> 
+#include <iostream> 
+#include <sstream> 
+#include <cfloat>
+#include <ctime> 
+#include <climits>
+using namespace std; 
+ 
+typedef long long int64; 
+typedef unsigned long long uint64;
+ 
+template<typename T> int size(const T& c) { return int(c.size()); }
+template<typename T> T abs(T x) { return x < 0 ? -x : x; }
+template<typename T> T sqr(T x) { return x*x; }
+template<typename T> bool remin(T& x, const T& y) { if (!(y < x)) return false; x = y; return true; }
+template<typename T> bool remax(T& x, const T& y) { if (!(x < y)) return false; x = y; return true; }
+ 
+#define FOR(i, a, b) for (int i(a), _b(b); i <= _b; ++i)
+#define FORD(i, a, b) for (int i(a), _b(b); i >= _b; --i)
+#define REP(i, n) for (int i(0), _n(n); i < _n; ++i)
+#define REPD(i, n) for (int i((n) - 1); i >= 0; --i)
+
+int m;
+vector<int> T, P;
+
+int64 solve(int64 time, int n) {
+	static vector<int64> am;
+	am.resize(m);
+	REP(i, m) {
+		if (time < T[i]) am[i] = 0;
+		else am[i] = (time-T[i]+P[i])/P[i];
+	}
+	sort(am.begin(), am.end());
+	int64 res = 0;
+	REPD(i, m) {
+		if (n == 0) break;
+		res += am[i];
+		--n;
+	}
+	return res;
+}
+
+int main() {
+#ifdef REM_HOME
+	freopen("input.txt", "r", stdin);
+#endif
+ 
+	int t;
+	scanf("%d", &t);
+
+	while (t--) {
+		int n, k;
+		scanf("%d%d%d", &m, &n, &k);
+		T.resize(m);
+		REP(i, m) scanf("%d", &T[i]);
+		P.resize(m);
+		REP(i, m) scanf("%d", &P[i]);
+		int64 L = 0, R = 1;
+		while (solve(R, n) < k) {
+			L = R;
+			R *= 2;
+		}
+		while (R-L > 1) {
+			int64 M = (L+R)/2;
+			if (solve(M, n) >= k) R = M;
+			else L = M;
+		}
+
+		printf("%lld\n", R);
+	}
+}
+
+52.SUPW Zonal Computing Olympiad 2014, 30 Nov 2013
+--------------------------------------------------
+#include<iostream>
+#include<algorithm>
+#include<climits>
+#include<inttypes.h>
+using namespace std;
+typedef long long int ll;
+
+uint64_t w,sum,l,ratio,min1=UINT64_MAX;
+int n;
+uint64_t *arr,*arr1;
+int calc(uint64_t j){
+	sum = 0;
+	for (int k = 0; k < n; k++)
+		{
+				if((arr[k]+j*arr1[k])>=l){
+					sum+=arr[k]+j*arr1[k];
+					if(sum>=w){
+						return 1;
+					}
+				}
+
+		}
+		return 0;
+}
+
+int main(int argc, char const *argv[])
+{
+	
+	cin>>n>>w>>l;
+	arr= new uint64_t [n];
+	arr1= new uint64_t [n];
+	for (int i = 0; i <n; i++)
+	{
+		cin>>arr[i]>>arr1[i];
+
+	}
+	uint64_t lower=0,upper=1000000000000000000,mid,flag2,flag=calc(lower);
+	while(lower<upper){
+		mid=lower+(upper-lower)/2;
+		flag2=calc(mid);
+		if(flag2==1){
+			upper=mid;
+		}
+		else if(flag2==0){
+			lower=mid+1;
+			// flag=calc(lower);
+		}
+	}
+	if(calc(lower)){
+		cout<<lower<<"\n";
+		return 0;
+	}
+}
+
+
+51.Event Organizer
+--------------------
+import bisect as bs
+
+T = int(input())
+while T:
+    T -= 1
+    N, Q = map(int, input().split())
+    L = list(map(int, input().split()))
+    L.sort()
+    sum=[0] * N
+    for j in range(1, N):
+        sum[j] = sum[j - 1] + L[j]
+    for i in range(Q):
+        K = int(input())
+        pos = bs.bisect_left(L, K)
+        l = 0 
+        r = pos
+        while l < r:
+            m = (l + r) // 2
+            need = K * (pos -m ) - (sum[pos - 1] - sum[m - 1])
+            if(need <= m):
+                r = m
+            else:
+                l = m + 1
+        print(N - r)
+
+
+50.Count Subarrays
+------------------
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	static final StdIn in = new StdIn();
+	static final PrintWriter out = new PrintWriter(System.out);
+	
+	public static void main(String[] args) {
+		long m=in.nextLong();
+		int n=in.nextInt();
+		long[] l = new long[n], r = new long[n];
+		for(int i=0; i<n; ++i) {
+			l[i]=in.nextLong();
+			r[i]=in.nextLong();
+		}
+		long lb=1, rb=m/n;
+		while(lb<=rb) {
+			long mb=(lb+rb)/2;
+			long a=0;
+			for(int i=0; i<n; ++i)
+				a=Math.max(l[i]-i*mb, a);
+			boolean ok=true;
+			long lp=n*mb+a;
+			for(int i=n-1; i>=0&&ok; --i) {
+				lp=Math.min(r[i], lp-mb);
+				ok=l[i]<=lp;
+			}
+
+			ok&=lp+m-((n-1)*mb+a)>=mb;
+			if(ok)
+				lb=mb+1;
+			else
+				rb=mb-1;
+		}
+		out.println(rb);
+		out.close();
+	}
+	
+	static class StdIn {
+		final private int BUFFER_SIZE = 1 << 16;
+		private DataInputStream din;
+		private byte[] buffer;
+		private int bufferPointer, bytesRead;
+		public StdIn() {
+			din = new DataInputStream(System.in);
+			buffer = new byte[BUFFER_SIZE];
+			bufferPointer = bytesRead = 0;
+		}
+		public StdIn(InputStream in) {
+			try{
+				din = new DataInputStream(in);
+			} catch(Exception e) {
+				throw new RuntimeException();
+			}
+			buffer = new byte[BUFFER_SIZE];
+			bufferPointer = bytesRead = 0;
+		}
+		public String next() {
+			int c;
+			while((c=read())!=-1&&(c==' '||c=='\n'||c=='\r'));
+			StringBuilder s = new StringBuilder();
+			while (c != -1)
+			{
+				if (c == ' ' || c == '\n'||c=='\r')
+					break;
+				s.append((char)c);
+				c=read();
+			}
+			return s.toString();
+		}
+		public String nextLine() {
+			int c;
+			while((c=read())!=-1&&(c==' '||c=='\n'||c=='\r'));
+			StringBuilder s = new StringBuilder();
+			while (c != -1)
+			{
+				if (c == '\n'||c=='\r')
+					break;
+				s.append((char)c);
+				c = read();
+			}
+			return s.toString();
+		}
+		public int nextInt() {
+			int ret = 0;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+			do
+				ret = ret * 10 + c - '0';
+			while ((c = read()) >= '0' && c <= '9');
+
+			if (neg)
+				return -ret;
+			return ret;
+		}
+		public int[] readIntArray(int n, int os) {
+			int[] ar = new int[n];
+			for(int i=0; i<n; ++i)
+				ar[i]=nextInt()+os;
+			return ar;
+		}
+		public long nextLong() {
+			long ret = 0;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+			do
+				ret = ret * 10 + c - '0';
+			while ((c = read()) >= '0' && c <= '9');
+			if (neg)
+				return -ret;
+			return ret;
+		}
+		public long[] readLongArray(int n, long os) {
+			long[] ar = new long[n];
+			for(int i=0; i<n; ++i)
+				ar[i]=nextLong()+os;
+			return ar;
+		}
+		public double nextDouble() {
+			double ret = 0, div = 1;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+			do
+				ret = ret * 10 + c - '0';
+			while ((c = read()) >= '0' && c <= '9');
+			if (c == '.')
+				while ((c = read()) >= '0' && c <= '9')
+					ret += (c - '0') / (div *= 10);
+			if (neg)
+				return -ret;
+			return ret;
+		}
+		private void fillBuffer() throws IOException {
+			bytesRead = din.read(buffer, bufferPointer = 0, BUFFER_SIZE);
+			if (bytesRead == -1)
+				buffer[0] = -1;
+		}
+		private byte read() {
+			try{
+				if (bufferPointer == bytesRead)
+					fillBuffer();
+				return buffer[bufferPointer++];
+			} catch(IOException e) {
+				throw new RuntimeException();
+			}
+		}
+		public void close() throws IOException {
+			if (din == null)
+				return;
+			din.close();
+		}
+	}
+}
+
+
+49.Alternating subarray prefix
+----------------------------------
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+#include <queue>
+#include <ctime>
+#include <cassert>
+#include <complex>
+#include <string>
+#include <cstring>
+#include <chrono>
+#include <random>
+#include <queue>
+#include <bitset>
+#include <iomanip>
+#include <fstream>
+#include <stack>
+
+using namespace std;
+ 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> PII;
+typedef pair<ll , ll> PLL;
+typedef long double ld;
+ 
+#define pb push_back
+#define all(c) c.begin(),c.end()
+#define allr(c) c.rbegin(),c.rend()
+int mod = 1000000007;
+const int inf = 1034567891;
+const ll LL_INF = 1234567890123456789ll;
+#define PI 3.14159265
+#define endl '\n'
+#define F first
+#define S second
+#define debug(x) cout << #x << " = " << x << endl;
+#define TRACE
+ 
+#ifdef TRACE
+#define trace(...) _f(#__VA_ARGS__, __VA_ARGS__)
+template <typename Arg1>
+void __f(const char* name, Arg1&& arg1){
+  cout << name << " : " << arg1 << endl;
+}
+template <typename Arg1, typename... Args>
+void __f(const char* names, Arg1&& arg1, Args&&... args){
+  const char* comma = strchr(names + 1, ',');cout.write(names, comma - names) << " : " << arg1<<" | ";__f(comma+1, args...);
+}
+#else
+#define trace(...)
+#endif
+ 
+#define out(container) for (auto it : container) cout << it << " "; cout << endl;
+ 
+ 
+template < typename T > T GCD(T a, T b)            { ll t; while(a) { t = a; a = b % a; b = t; } return b; }
+template < typename T > string toString(T a)       { return to_string(a); }
+template < typename T > void toInt(string s, T &x) { stringstream str(s); str >> x;}
+inline int add(int x, int y){ x += y; if(x >= mod) x -= mod; return x;}
+inline int sub(int x, int y){ x -= y; if(x < 0) x += mod; return x;}
+inline int mul(int x, int y){ return (x * 1ll * y) % mod;}
+inline int powr(int a, ll b){
+  int x = 1 % mod;
+  while(b){
+    if(b & 1) x = mul(x, a);
+    a = mul(a, a);
+    b >>= 1;
+  }
+  return x;
+}
+inline int inv(int a){ return powr(a, mod - 2);}
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  
+  int test;
+  cin >> test;
+  while (test--) {
+    int n;
+    cin >> n;
+    
+    long long sum = 0;
+    int v;
+    vector<int> vec;
+    
+    long long ans = 0;
+    
+    for (int i = 0; i < n; i++) {
+        cin >> v;
+        vec.push_back(v);
+        sum += v;
+        ans = max(ans, (sum + i) / (i + 1));
+    }
+    
+    cout << ans << endl;
+  }
+
+  return 0;
+}
+
+
+48.Barcelona Gamplay Tactics
+----------------------------
+#include <stdio.h>
+#include <math.h>
+
+int can_finish_bananas(int piles[], int N, int K, int H) {
+    int hours = 0;
+    for (int i = 0; i < N; i++) {
+        hours += ceil((double)piles[i] / K);
+    }
+    return hours <= H;
+}
+
+int find_min_eating_speed(int piles[], int N, int H) {
+    int left = 1, right = piles[0];
+    for (int i = 1; i < N; i++) {
+        if (piles[i] > right) {
+            right = piles[i];
+        }
+    }
+
+    while (left < right) {
+        int mid = (left + right) / 2;
+        if (can_finish_bananas(piles, N, mid, H)) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        int N, H;
+        scanf("%d %d", &N, &H);
+
+        int piles[N];
+        for (int i = 0; i < N; i++) {
+            scanf("%d", &piles[i]);
+        }
+
+        int min_speed = find_min_eating_speed(piles, N, H);
+        printf("%d\n", min_speed);
+    }
+
+    return 0;
+}
+
+
+47.Count Palindromes
+---------------------
+#include <iostream>
+#include<bits/stdc++.h>
+#define d long long int
+#define g 1000000001
+using namespace std;
+
+int main() {
+
+ d t;
+	cin>>t;
+	while(t--){
+	    d n,ans,x=g;
+	    cin>>n;
+	 d  a[31];
+	for(int i=0;i<31;i++){
+	        a[i]=pow(2,i);}
+	        for(int i=0;i<31;i++){
+	           for(int j=i+1;j<31;j++){
+	               ans=a[i]+a[j];
+	               x=min(x,abs(ans-n));
+	           }
+	               
+	    }
+	   cout<<x<<endl;   
+	}
+	return 0;
+}
+
+46.Magic Rankings
+-------------------
+#include <bits/stdc++.h>
+using namespace std;
+#define ll  long long
+int f(vector<int>& a,int d){
+    int l=0;
+    int h=a.size()-1;
+    int ans=-1;
+    while(l<=h){
+        int mid=l +(h-l)/2;
+        if(d-a[mid]==0){
+          ans=a.size()+1;
+          break;
+        }
+        if(d-a[mid]<0){
+            h=mid-1;
+            ans=mid;
+        }else{
+            l=mid+1;
+        }
+    }
+    return ans;
+}
+
+signed main() {
+    int n,q;
+    cin>>n>>q;
+	vector<int>a;
+	for(int i=0;i<n;i++){
+	    int d;
+	    cin>>d;
+	    a.push_back(d);
+	}
+	sort(a.begin(),a.end());
+	   for(int i=0;i<q;i++){
+	       int d;
+	       cin>>d;
+	       
+	      
+	       int ans= f(a,d);
+	       if(ans==a.size()+1){
+	           cout<<0<<endl;
+	           continue;
+	       }
+	       if(ans!=-1){
+	           int count=n-ans;
+	           if(count%2==0)cout<<"POSITIVE\n";
+	           else  cout<<"NEGATIVE\n";
+	       }else{
+	           cout<<"POSITIVE\n";
+	       }
+	       
+	   }
+	return 0;
+}
+
+
+45.Binary Substitution
+-------------------------
+#include <stdio.h>
+int findMaxHeight(int n) {
+    int height = 0;
+    int coinsUsed = 0;
+
+    while (coinsUsed <= n) {
+        height++;
+        coinsUsed += height;
+    }
+
+    return height - 1;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        int N;
+        scanf("%d", &N);
+
+        int maxHeight = findMaxHeight(N);
+
+        printf("%d\n", maxHeight);
+    }
+
+    return 0;
+}
+
+
+44.Flu shot Lineup
+-------------------
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long 
+
+int main() {
+	// your code goes here
+		int k;
+	cin>>k;
+	while(k--) {
+	    ll n;
+	    cin>>n;
+	    double t;
+	    cin>>t;
+	    double dist[n];
+	    double ans=0.0;
+	    
+	    for(int i=0;i<n;i++) {
+	        cin>>dist[i];
+	    }
+	    
+	    double l=0.0,r=n*t;
+	    
+	    while(l<=r) {
+	        double mid= (l+r)/2;
+	        double lastele=max(0.0,dist[0]-mid);
+	        double curr=0.0;
+	        bool found=1;
+	        for(int i=1;i<n;i++) {
+	            curr=max(lastele+t,dist[i]-mid);
+	            lastele=curr;
+	            if(curr>dist[i]+mid) {
+	                found=0;
+	                break;
+	            }
+	        }
+	        if(found) {
+	            ans=mid;
+	            r=mid-0.00001;
+	        }
+	        else l=mid+0.00001;
+	    }
+	    cout<<fixed<<setprecision(4)<<ans<<endl;
+	}
+	return 0;
+}
+
+
+
+43.Circular intervals
+---------------------
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+ll m, n;
+ll s[1000000], e[1000000];
+
+bool check(ll d) {
+ll curr = s[0], first = s[0];
+for (int i = 1; i < n; i++) {
+if (curr+d < s[i])
+curr = s[i];
+else if (curr+d >= s[i] && curr+d <= e[i])
+curr = curr+d;
+else
+return false;
+
+}
+if (curr+d < m) return true;
+ll n_curr = (curr+d) % m;
+if (n_curr > e[0]) return false;
+for (int i = 1; i < n; i++) {
+if (n_curr+d < s[i])
+n_curr = s[i];
+else if (n_curr+d >= s[i] && n_curr+d <= e[i])
+n_curr = n_curr+d;
+else
+return false;
+}
+if (n_curr <= curr) return true;
+return false;
+}
+int main() {
+#ifndef ONLINE_JUDGE
+freopen("input.in", "r", stdin);
+freopen("output.out", "w", stdout);
+#endif
+scanf("%lld %lld", &m, &n);
+for (int i = 0; i < n; i++) scanf("%lld %lld", &s[i], &e[i]);
+ll hi = 1e18, lo = 1, mid, ans;
+while (lo <= hi) {
+mid = (lo+hi)/2;
+if (check(mid)) {
+ans = mid;
+lo = mid+1;
+} else hi = mid-1;
+}
+printf("%lld", ans);
+}
+
+
+42.Minimize the Maximum
+------------------------
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+#include <queue>
+#include <ctime>
+#include <cassert>
+#include <complex>
+#include <string>
+#include <cstring>
+#include <chrono>
+#include <random>
+#include <queue>
+#include <bitset>
+#include <iomanip>
+#include <fstream>
+#include <stack>
+
+using namespace std;
+ 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<int,int> PII;
+typedef pair<ll , ll> PLL;
+typedef long double ld;
+ 
+#define pb push_back
+#define all(c) c.begin(),c.end()
+#define allr(c) c.rbegin(),c.rend()
+int mod = 1000000007;
+const int inf = 1034567891;
+const ll LL_INF = 1234567890123456789ll;
+#define PI 3.14159265
+#define endl '\n'
+#define F first
+#define S second
+#define debug(x) cout << #x << " = " << x << endl;
+#define TRACE
+ 
+#ifdef TRACE
+#define trace(...) _f(#__VA_ARGS__, __VA_ARGS__)
+template <typename Arg1>
+void __f(const char* name, Arg1&& arg1){
+  cout << name << " : " << arg1 << endl;
+}
+template <typename Arg1, typename... Args>
+void __f(const char* names, Arg1&& arg1, Args&&... args){
+  const char* comma = strchr(names + 1, ',');cout.write(names, comma - names) << " : " << arg1<<" | ";__f(comma+1, args...);
+}
+#else
+#define trace(...)
+#endif
+ 
+#define out(container) for (auto it : container) cout << it << " "; cout << endl;
+
+template < typename T > T GCD(T a, T b)            { ll t; while(a) { t = a; a = b % a; b = t; } return b; }
+template < typename T > string toString(T a)       { return to_string(a); }
+template < typename T > void toInt(string s, T &x) { stringstream str(s); str >> x;}
+inline int add(int x, int y){ x += y; if(x >= mod) x -= mod; return x;}
+inline int sub(int x, int y){ x -= y; if(x < 0) x += mod; return x;}
+inline int mul(int x, int y){ return (x * 1ll * y) % mod;}
+inline int powr(int a, ll b){
+  int x = 1 % mod;
+  while(b){
+    if(b & 1) x = mul(x, a);
+    a = mul(a, a);
+    b >>= 1;
+  }
+  return x;
+}
+inline int inv(int a){ return powr(a, mod - 2);}
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  
+  int test;
+  cin >> test;
+  while (test--) {
+    int n;
+    cin >> n;
+    
+    long long sum = 0;
+    int v;
+    vector<int> vec;
+    
+    long long ans = 0;
+    
+    for (int i = 0; i < n; i++) {
+        cin >> v;
+        vec.push_back(v);
+        sum += v;
+        ans = max(ans, (sum + i) / (i + 1));
+    }
+    
+    cout << ans << endl;
+  }
+
+  return 0;
+}
+
 
 
 41.Squirrel and chestnut
