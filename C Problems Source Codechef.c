@@ -63,7 +63,7 @@ using namespace std;
 #define ll long long 
 
 int main() {
-	// your code goes here
+
 		int k;
 	cin>>k;
 	while(k--) {
@@ -236,7 +236,7 @@ int main(int argc, char const *argv[])
 		}
 		else if(flag2==0){
 			lower=mid+1;
-			// flag=calc(lower);
+
 		}
 	}
 	if(calc(lower)){
