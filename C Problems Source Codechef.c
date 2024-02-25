@@ -58,389 +58,224 @@ Problems Titles :
 
 54.Maximal crosses
 ----------------------
-#include <bits/stdc++.h>
-using namespace std;
-#define ll long long 
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
+bool valid(int x, int y, int n) {
+    return (x >= 0 && x <= n && y >= 0 && y <= n);
+}
+
+int cnt(std::vector<std::vector<int>>& g, int cx, int cy, int x, int y, int n) {
+    int count = 0;
+    while (valid(x, y, n) && g[x][y] == 1) {
+        x += cx;
+        y += cy;
+        count += 1;
+    }
+
+    return count-1;
+}
+
+void helper(std::vector<std::vector<std::vector<int>>>& dp, std::vector<std::vector<int>>& g, std::vector<std::vector<int>>& b, int n, int x, int y) {
+    std::pair<int, int> vecs[] = {{0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
+    std::pair<int, int> inds[] = {{6, 2}, {7, 3}, {0, 4}, {1, 5}};
+
+    int ans = 1;
+
+    for (int i = 0; i < 4; i++) {
+    int prevx = x + vecs[i].first;
+        int prevy = y + vecs[i].second;
+        int ind1 = inds[i].first;
+        int ind2 = inds[i].second;
+
+        if (valid(prevx, prevy, n) && g[prevx][prevy] == 1) {
+            ans = std::max(ans, dp[prevx][prevy][ind1] + dp[prevx][prevy][ind2] + 1);
+            dp[x][y][ind1] = dp[prevx][prevy][ind1] + 1;
+            dp[x][y][ind2] = dp[prevx][prevy][ind2] - 1;
+        }
+        else {
+            dp[x][y][ind1] = cnt(g, vecs[i].first, vecs[i].second, x, y, n);
+            dp[x][y][ind2] = cnt(g, vecs[i].first*(-1), vecs[i].second*(-1), x, y, n);
+
+            ans = std::max(ans, dp[x][y][ind1]+dp[x][y][ind2]+1);
+        }
+    }
+
+    b[x][y] = ans;
+}
+
+void solve(std::vector<std::vector<std::vector<int>>>& dp, std::vector<std::vector<int>>& g, std::vector<std::vector<int>>& b, int n) {
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            
+            if (g[i][j] == 0) {
+                continue;
+            }
+
+            helper(dp, g, b, n, i, j);
+        }
+    }
+}
 int main() {
 
-		int k;
-	cin>>k;
-	while(k--) {
-	    ll n;
-	    cin>>n;
-	    double t;
-	    cin>>t;
-	    double dist[n];
-	    double ans=0.0;
-	    
-	    for(int i=0;i<n;i++) {
-	        cin>>dist[i];
-	    }
-	    
-	    double l=0.0,r=n*t;
-	    
-	    while(l<=r) {
-	        double mid= (l+r)/2;
-	        double lastele=max(0.0,dist[0]-mid);
-	        double curr=0.0;
-	        bool found=1;
-	        for(int i=1;i<n;i++) {
-	            curr=max(lastele+t,dist[i]-mid);
-	            lastele=curr;
-	            if(curr>dist[i]+mid) {
-	                found=0;
-	                break;
-	            }
-	        }
-	        if(found) {
-	            ans=mid;
-	            r=mid-0.00001;
-	        }
-	        else l=mid+0.00001;
-	    }
-	    cout<<fixed<<setprecision(4)<<ans<<endl;
-	}
+	 int n;
+
+        std::cin >> n;
+
+        std::vector<std::vector<std::vector<int>>> dp(n+1, std::vector<std::vector<int>>(n+1, std::vector<int>(8, 0)));
+        std::vector<std::vector<int>> b(n+1, std::vector<int>(n+1, 0));
+        std::vector<std::vector<int>> g(n+1, std::vector<int>(n+1, 0));
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                char temp;
+                std::cin >> temp;
+
+                if (temp == 'X')
+                    g[i][j] = 1;
+            }
+        }
+
+        solve(dp, g, b, n);
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                std::cout << b[i][j];
+            
+                if (j < n) {
+                    std::cout << " ";
+                }
+                else
+                    std::cout << std::endl;
+            }
+        }
 	return 0;
-}
+
 53.IPL Zonal Computing Olympiad 2014, 30 Nov 2013
 -------------------------------------------------
-#define _CRT_SECURE_NO_WARNINGS
-#include <map> 
-#include <set> 
-#include <cmath> 
-#include <queue> 
-#include <vector> 
-#include <string> 
-#include <cstdio> 
-#include <cstdlib> 
-#include <cstring> 
-#include <cassert> 
-#include <numeric> 
-#include <algorithm> 
-#include <iostream> 
-#include <sstream> 
-#include <cfloat>
-#include <ctime> 
-#include <climits>
-using namespace std; 
- 
-typedef long long int64; 
-typedef unsigned long long uint64;
- 
-template<typename T> int size(const T& c) { return int(c.size()); }
-template<typename T> T abs(T x) { return x < 0 ? -x : x; }
-template<typename T> T sqr(T x) { return x*x; }
-template<typename T> bool remin(T& x, const T& y) { if (!(y < x)) return false; x = y; return true; }
-template<typename T> bool remax(T& x, const T& y) { if (!(x < y)) return false; x = y; return true; }
- 
-#define FOR(i, a, b) for (int i(a), _b(b); i <= _b; ++i)
-#define FORD(i, a, b) for (int i(a), _b(b); i >= _b; --i)
-#define REP(i, n) for (int i(0), _n(n); i < _n; ++i)
-#define REPD(i, n) for (int i((n) - 1); i >= 0; --i)
-
-int m;
-vector<int> T, P;
-
-int64 solve(int64 time, int n) {
-	static vector<int64> am;
-	am.resize(m);
-	REP(i, m) {
-		if (time < T[i]) am[i] = 0;
-		else am[i] = (time-T[i]+P[i])/P[i];
-	}
-	sort(am.begin(), am.end());
-	int64 res = 0;
-	REPD(i, m) {
-		if (n == 0) break;
-		res += am[i];
-		--n;
-	}
-	return res;
-}
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+//#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL) ; cout.tie(NULL);
 
 int main() {
-#ifdef REM_HOME
-	freopen("input.txt", "r", stdin);
-#endif
- 
-	int t;
-	scanf("%d", &t);
 
-	while (t--) {
-		int n, k;
-		scanf("%d%d%d", &m, &n, &k);
-		T.resize(m);
-		REP(i, m) scanf("%d", &T[i]);
-		P.resize(m);
-		REP(i, m) scanf("%d", &P[i]);
-		int64 L = 0, R = 1;
-		while (solve(R, n) < k) {
-			L = R;
-			R *= 2;
-		}
-		while (R-L > 1) {
-			int64 M = (L+R)/2;
-			if (solve(M, n) >= k) R = M;
-			else L = M;
-		}
+    //fastio;
 
-		printf("%lld\n", R);
-	}
+    ll n;
+    vector<ll> money(2000005);
+    vector<ll> dpc(2000005);
+    vector<ll> dpnc(2000005);
+
+    cin >> n;
+    for(ll i = 0; i < n; i++) cin >> money[i];
+
+    // OPTIMAL SUB-PROBLEM :
+
+    // dpc[i] = maximum money we can make if we play i-1th and ith game
+    // dpnc[i] = maximum money we can meke if we play i-2th and ith game
+
+    // BASE CASE :
+
+    dpc[0] = money[0];
+    dpnc[0] = 0;
+
+    dpc[1] = money[0] + money[1];
+    dpnc[1] = money[1];
+    ll best = 0;
+
+    // RECURSIVE RELATION :
+
+    for(int i = 2; i < n; i++){
+        dpc[i] = max( money[i] + dpnc[i-1] , dpc[i-1]);
+        dpnc[i] = money[i] + max(dpnc[i-2] , dpc[i-2]);
+        best = max( max(best , dpc[i]) , dpnc[i]);
+    }
+
+    // OPTIMAL SOLUTION :
+
+    cout << best;
+
+    return 0;
 }
 
 52.SUPW Zonal Computing Olympiad 2014, 30 Nov 2013
 --------------------------------------------------
-#include<iostream>
-#include<algorithm>
-#include<climits>
-#include<inttypes.h>
-using namespace std;
-typedef long long int ll;
+# cook your dish here
+N = int(input())
+minutes = list(map(int, input().split()))
 
-uint64_t w,sum,l,ratio,min1=UINT64_MAX;
-int n;
-uint64_t *arr,*arr1;
-int calc(uint64_t j){
-	sum = 0;
-	for (int k = 0; k < n; k++)
-		{
-				if((arr[k]+j*arr1[k])>=l){
-					sum+=arr[k]+j*arr1[k];
-					if(sum>=w){
-						return 1;
-					}
-				}
+# Initialize dp array
+dp = [0] * N
 
-		}
-		return 0;
-}
+# Base cases
+dp[0] = minutes[0]
+dp[1] = minutes[1]
+dp[2] = minutes[2]
 
-int main(int argc, char const *argv[])
-{
-	
-	cin>>n>>w>>l;
-	arr= new uint64_t [n];
-	arr1= new uint64_t [n];
-	for (int i = 0; i <n; i++)
-	{
-		cin>>arr[i]>>arr1[i];
+# Iterate from the fourth day to the last day
+for i in range(3, N):
+    # Nikhil can choose to do SUPW on day i or take a break
+    dp[i] = minutes[i] + min(dp[i - 1], dp[i - 2], dp[i - 3])
 
-	}
-	uint64_t lower=0,upper=1000000000000000000,mid,flag2,flag=calc(lower);
-	while(lower<upper){
-		mid=lower+(upper-lower)/2;
-		flag2=calc(mid);
-		if(flag2==1){
-			upper=mid;
-		}
-		else if(flag2==0){
-			lower=mid+1;
-
-		}
-	}
-	if(calc(lower)){
-		cout<<lower<<"\n";
-		return 0;
-	}
-}
-
+# Return the minimum of the last three elements of dp
+result = min(dp[-1], dp[-2], dp[-3])
+print(result)
 
 51.Event Organizer
 --------------------
-import bisect as bs
-
+# cook your dish here
 T = int(input())
 while T:
     T -= 1
-    N, Q = map(int, input().split())
-    L = list(map(int, input().split()))
-    L.sort()
-    sum=[0] * N
-    for j in range(1, N):
-        sum[j] = sum[j - 1] + L[j]
-    for i in range(Q):
-        K = int(input())
-        pos = bs.bisect_left(L, K)
-        l = 0 
-        r = pos
-        while l < r:
-            m = (l + r) // 2
-            need = K * (pos -m ) - (sum[pos - 1] - sum[m - 1])
-            if(need <= m):
-                r = m
-            else:
-                l = m + 1
-        print(N - r)
+    N = int(input())
+    V = [[0 for i in range(49)] for j in range(49)]
+    maximum_list = [0] * 49
+    for i in range(1, N + 1):
+        S, E, C = list(map(int, input().split()))
+        V[S][E] = max(V[S][E], C)
+    for end in range(49):
+        for begin in range(end):
+            maximum_list[end] = max(maximum_list[end], V[begin][end] + maximum_list[begin])
+    print(maximum_list[48])
 
 
 50.Count Subarrays
 ------------------
-import java.io.*;
-import java.util.*;
+# cook your dish here
+def count_non_decreasing_subarrays(arr):
+    count = 0
+    n = len(arr)
+    i = 0
 
-public class Main {
-	static final StdIn in = new StdIn();
-	static final PrintWriter out = new PrintWriter(System.out);
-	
-	public static void main(String[] args) {
-		long m=in.nextLong();
-		int n=in.nextInt();
-		long[] l = new long[n], r = new long[n];
-		for(int i=0; i<n; ++i) {
-			l[i]=in.nextLong();
-			r[i]=in.nextLong();
-		}
-		long lb=1, rb=m/n;
-		while(lb<=rb) {
-			long mb=(lb+rb)/2;
-			long a=0;
-			for(int i=0; i<n; ++i)
-				a=Math.max(l[i]-i*mb, a);
-			boolean ok=true;
-			long lp=n*mb+a;
-			for(int i=n-1; i>=0&&ok; --i) {
-				lp=Math.min(r[i], lp-mb);
-				ok=l[i]<=lp;
-			}
+    while i < n:
+        length = 1
 
-			ok&=lp+m-((n-1)*mb+a)>=mb;
-			if(ok)
-				lb=mb+1;
-			else
-				rb=mb-1;
-		}
-		out.println(rb);
-		out.close();
-	}
-	
-	static class StdIn {
-		final private int BUFFER_SIZE = 1 << 16;
-		private DataInputStream din;
-		private byte[] buffer;
-		private int bufferPointer, bytesRead;
-		public StdIn() {
-			din = new DataInputStream(System.in);
-			buffer = new byte[BUFFER_SIZE];
-			bufferPointer = bytesRead = 0;
-		}
-		public StdIn(InputStream in) {
-			try{
-				din = new DataInputStream(in);
-			} catch(Exception e) {
-				throw new RuntimeException();
-			}
-			buffer = new byte[BUFFER_SIZE];
-			bufferPointer = bytesRead = 0;
-		}
-		public String next() {
-			int c;
-			while((c=read())!=-1&&(c==' '||c=='\n'||c=='\r'));
-			StringBuilder s = new StringBuilder();
-			while (c != -1)
-			{
-				if (c == ' ' || c == '\n'||c=='\r')
-					break;
-				s.append((char)c);
-				c=read();
-			}
-			return s.toString();
-		}
-		public String nextLine() {
-			int c;
-			while((c=read())!=-1&&(c==' '||c=='\n'||c=='\r'));
-			StringBuilder s = new StringBuilder();
-			while (c != -1)
-			{
-				if (c == '\n'||c=='\r')
-					break;
-				s.append((char)c);
-				c = read();
-			}
-			return s.toString();
-		}
-		public int nextInt() {
-			int ret = 0;
-			byte c = read();
-			while (c <= ' ')
-				c = read();
-			boolean neg = (c == '-');
-			if (neg)
-				c = read();
-			do
-				ret = ret * 10 + c - '0';
-			while ((c = read()) >= '0' && c <= '9');
+        while i < n - 1 and arr[i] <= arr[i + 1]:
+            length += 1
+            i += 1
 
-			if (neg)
-				return -ret;
-			return ret;
-		}
-		public int[] readIntArray(int n, int os) {
-			int[] ar = new int[n];
-			for(int i=0; i<n; ++i)
-				ar[i]=nextInt()+os;
-			return ar;
-		}
-		public long nextLong() {
-			long ret = 0;
-			byte c = read();
-			while (c <= ' ')
-				c = read();
-			boolean neg = (c == '-');
-			if (neg)
-				c = read();
-			do
-				ret = ret * 10 + c - '0';
-			while ((c = read()) >= '0' && c <= '9');
-			if (neg)
-				return -ret;
-			return ret;
-		}
-		public long[] readLongArray(int n, long os) {
-			long[] ar = new long[n];
-			for(int i=0; i<n; ++i)
-				ar[i]=nextLong()+os;
-			return ar;
-		}
-		public double nextDouble() {
-			double ret = 0, div = 1;
-			byte c = read();
-			while (c <= ' ')
-				c = read();
-			boolean neg = (c == '-');
-			if (neg)
-				c = read();
-			do
-				ret = ret * 10 + c - '0';
-			while ((c = read()) >= '0' && c <= '9');
-			if (c == '.')
-				while ((c = read()) >= '0' && c <= '9')
-					ret += (c - '0') / (div *= 10);
-			if (neg)
-				return -ret;
-			return ret;
-		}
-		private void fillBuffer() throws IOException {
-			bytesRead = din.read(buffer, bufferPointer = 0, BUFFER_SIZE);
-			if (bytesRead == -1)
-				buffer[0] = -1;
-		}
-		private byte read() {
-			try{
-				if (bufferPointer == bytesRead)
-					fillBuffer();
-				return buffer[bufferPointer++];
-			} catch(IOException e) {
-				throw new RuntimeException();
-			}
-		}
-		public void close() throws IOException {
-			if (din == null)
-				return;
-			din.close();
-		}
-	}
-}
+        count += (length * (length + 1)) // 2
+        i += 1
+
+    return count
+
+# Read the number of test cases
+T = int(input())
+
+# Process each test case
+for _ in range(T):
+    # Read the size of the array
+    N = int(input())
+
+    # Read the array
+    A = list(map(int, input().split()))
+
+    # Count the number of non-decreasing subarrays and print the result
+    print(count_non_decreasing_subarrays(A))
+
+
 
 
 49.Alternating subarray prefix
