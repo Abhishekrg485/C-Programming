@@ -33,17 +33,18 @@ Problems Titles :
 31.Watson asks Does permutation Exist
 32.Snakes, Mongooses and the Ultimate Election
 33.K-flip
-34.Coins and Triangle
-35. The Wave
-36.Shoekand and Number
-37.Minion Chef and Banana
-38.Snake Eating
-39.Forest Gathering
-40.Squirrel and chestnut
-41.
+34.Zonal Computing Olympaid 2015 ,29 Nov 2014
+35.Coins and Triangle
+36. The Wave
+37.Shoekand and Number
+38.Minion Chef and Banana
+39.Snake Eating
+40.Forest Gathering
+41.Squirrel and chestnut
+42.
 
 
-Squirrel and chestnut
+41.Squirrel and chestnut
 -------------------------
 #include <iostream>
 #include <vector>
@@ -102,7 +103,7 @@ int main() {
     return 0;
 }
 
-Forest Gathering
+40.Forest Gathering
 ----------------
 #include <stdio.h>
 
@@ -204,7 +205,7 @@ int main() {
 }
 
 
-Snake Eating
+39.Snake Eating
 ------------------
 
 #include<bits/stdc++.h>
@@ -288,7 +289,7 @@ int main()
 }
  
 
-Minion Chef and Banana
+38.Minion Chef and Banana
 -----------------------
 #include <stdio.h>
 
@@ -333,7 +334,7 @@ int main() {
 }
 
 
-Shoekand and number
+37.Shoekand and number
 --------------------
 #include <stdio.h>
 #include <math.h>
@@ -377,7 +378,7 @@ int main(void) {
 
 }
 
-The Wave
+36.The Wave
 -------------------
 #include <iostream>
 #include <algorithm>
@@ -429,7 +430,7 @@ int main() {
     return 0;
 }
 
-Coins and Triangle
+35.Coins and Triangle
 --------------------
 #include <stdio.h>
 
@@ -454,7 +455,7 @@ int main() {
     }
     return 0;}
 
-Zonal Computing Olympiad 2015, 29 Nov 2014
+34.Zonal Computing Olympiad 2015, 29 Nov 2014
 ---------------------------------------------
 #include <iostream>
 #include <vector>
@@ -502,7 +503,7 @@ int main() {
 
 
 
-K-flip
+33.K-flip
 ----------------
 #include <stdio.h>
 #include <string.h>
@@ -548,7 +549,7 @@ int main() {
 
 
 
-Snakes, Mongooses and the Ultimate Election
+32.Snakes, Mongooses and the Ultimate Election
 -----------------------------------------------
 #include<bits/stdc++.h>
 #define pi                  acos(-1)
@@ -613,7 +614,7 @@ cin>>a;
 
 }
 
-watson asks Does permutation Exist
+31.watson asks Does permutation Exist
 -------------------------------------
 #include<iostream>
 #include<stdlib.h>
@@ -656,7 +657,7 @@ int main()
 }
 
 
-Maximum Weight difference
+30.Maximum Weight difference
 -----------------------------
 for _ in range(int(input())):
     N,K=map(int,input().split())
@@ -675,7 +676,7 @@ for _ in range(int(input())):
         print(first)
 
 
-Maximize Disjoint pair sum
+29.Maximize Disjoint pair sum
 -----------------------------
 #include <bits/stdc++.h>
 using namespace std;
@@ -706,7 +707,7 @@ int main() {
 	return 0;
 }
 
-Evacuate to Moon
+28.Evacuate to Moon
 ---------------------
 #include <bits/stdc++.h>
 using namespace std;
@@ -754,7 +755,7 @@ int main() {
     return 0;
 }
 
-Little Elephant and Divisors
+26.Little Elephant and Divisors
 ---------------------------------
 #include <stdio.h>
 #include <math.h>
@@ -795,7 +796,7 @@ int main() {
 }
 
 
-Number of factors
+25.Number of factors
 ---------------------------
 const MAX = 1000001;
 function countFactors(n) {
@@ -848,7 +849,7 @@ function main() {
 main();
 
 
-Little Elephant and Divisors 
+24.Little Elephant and Divisors 
 ------------------------------
 #include <stdio.h>
 #include <math.h>
@@ -894,7 +895,7 @@ int main() {
 
 
 
-Chef and Interview(java)
+23.Chef and Interview(java)
 -------------------
 import java.io.*;
 import java.util.*;
@@ -977,7 +978,7 @@ public class Main {
 }
 }
 }
-Cutting Recipes
+22.Cutting Recipes
 ----------------
 #include <stdio.h>
 int gcd(int a, int b) {
@@ -1011,7 +1012,7 @@ int main() {
     return 0;
 }
 
-Existence
+21.Existence
 ------------
 #include <stdio.h>
 int main() {
@@ -1030,7 +1031,7 @@ int main() {
     return 0;
 }
 
-Simple Statistics
+20.Simple Statistics
 -----------------------
 #include <stdio.h>
 #include <stdlib.h>
@@ -1058,7 +1059,7 @@ int main() {
     return 0;
 }
 
-WA Test Cases
+19.WA Test Cases
 ---------------------
 #include <stdio.h>
 #include <limits.h>
@@ -1087,7 +1088,7 @@ int main() {
     return 0;
 }
 
-ChefWatson uses Social Network
+18.ChefWatson uses Social Network
 ----------------------------------
 
 #include <stdio.h>
@@ -1135,7 +1136,7 @@ int main() {
     return 0;
 }
 
-400M Race
+17.400M Race
 --------------
 #include <stdio.h>
 int main() {
@@ -1158,7 +1159,7 @@ int main() {
     return 0;
 }
 
-Passing Marks
+16.Passing Marks
 ------------------
 #include <stdio.h>
 #include <stdlib.h>
@@ -1184,7 +1185,7 @@ int main() {
     return 0;
 }
 
-Facebook
+15.Facebook
 -----------------
 #include <stdio.h>
 int main() {
@@ -1212,7 +1213,7 @@ int main() {
 }
 
 
-Chef and easy problem
+14.Chef and easy problem
 -----------------------------
 #include <stdio.h>
 #include <stdlib.h>
@@ -1243,7 +1244,7 @@ int main() {
 }
 
 
-Andrew and the Meatballs
+13.Andrew and the Meatballs
 ---------------------------------
 #include <stdio.h>
 int main() {
@@ -1284,52 +1285,34 @@ int main() {
     return 0;
 }
 
-Turbo Sort
--------------------
-Given a list of numbers, you have to sort them in non decreasing order.
 
+12.Turn It
+---------
 #include <stdio.h>
-#include <limits.h>
-int main() {
-    int t;
-    scanf("%d", &t);
-    while (t--) {
-        int n;
-        scanf("%d", &n);
-        int sizes[n];
-        for (int i = 0; i < n; i++) {
-            scanf("%d", &sizes[i]);
+
+int main(void) {
+    int T;
+    scanf("%d", &T);
+
+    while (T--) {
+        long long U, V, A, S;
+        scanf("%lld %lld %lld %lld", &U, &V, &A, &S);
+        long long min_distance = (U * U) - (V * V);
+               if (min_distance <= 2 * A * S) {
+            printf("Yes\n");
+        } else {
+            printf("No\n");
         }
-
-        char verdict[n + 1];
-        scanf("%s", verdict);
-
-
-        int minSize = INT_MAX;
-
-
-        for (int i = 0; i < n; i++) {
-
-            if (verdict[i] == '0') {
-                if (sizes[i] < minSize) {
-                    minSize = sizes[i];
-                }
-            }
-        }
-        printf("%d\n", minSize);
     }
+
     return 0;
 }
 
-Maximum Length Even Subarray 
-----------------------------
+11.Distinct Pair Sums
+------------------
 #include <stdio.h>
-int max_even_subsequence_length(int N) {
-    int sequence_sum = N * (N + 1) / 2;
-    if (sequence_sum % 2 == 0) {
-        return N;
-    }
-        return N - 1;
+int count_reachable(int L, int R) {
+    return (2 * R - 2 * L) + 1;
 }
 
 int main() {
@@ -1337,15 +1320,201 @@ int main() {
     scanf("%d", &T);
 
     for (int i = 0; i < T; i++) {
-        int N;
-        scanf("%d", &N);
-        int result = max_even_subsequence_length(N);
+        int L, R;
+        scanf("%d %d", &L, &R);
+        int result = count_reachable(L, R);
         printf("%d\n", result);
+    }
+
+    return 0;
+}
+
+10.Tom And Jerry 
+----------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+char* can_reach_in_k_moves(int a, int b, int c, int d, int k) {
+    int distance = abs(a - c) + abs(b - d);
+    if (distance > k || (k - distance) % 2 != 0) {
+        return "NO";
+    } else {
+        return "YES";
+    }
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+
+    for (int i = 0; i < t; ++i) {
+        int a, b, c, d, k;
+        scanf("%d %d %d %d %d", &a, &b, &c, &d, &k);
+        char* result = can_reach_in_k_moves(a, b, c, d, k);
+        printf("%s\n", result);
+    }
+
+    return 0;
+}
+
+9.Alternate Additions
+-------------------
+#include <stdio.h>
+
+int main() 
+{
+    int t;
+    scanf("%d", &t);
+    
+    while(t--)
+    {
+        int A,B;
+        scanf("%d %d", &A, &B);
+        int diff = B - A;
+        if ((B - A) % 3 == 0)
+        {
+            printf("Yes\n");
+        }
+        else if ((B - A)%3 == 1)
+        {
+            printf("Yes\n");
+        }
+        else
+        {
+            printf("No\n");
+        }
     }
     return 0;
 }
 
-Racing Horses
+8.The Begining Era Of Cyberverse
+-------------------------------
+
+#include <stdio.h>
+
+int solve(int N, int K) {
+    return K / N;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    for (int tc = 0; tc < T; ++tc) {
+        int N, K;
+        scanf("%d %d", &N, &K);
+
+        printf("%d\n", solve(N, K));
+    }
+
+    return 0;
+}
+
+7.Fill The Grid
+-------------
+#include <stdio.h>
+
+int main() 
+{
+    int t;
+    scanf("%d", &t);
+    
+    while(t--)
+    {
+        int n,m;
+        scanf("%d %d", &n, &m);
+        if(n % 2 != 0 && m % 2 != 0)
+        {
+            printf("%d\n", n+m-1);
+        }
+        else if(n % 2 != 0 && m % 2 == 0)
+        {
+            printf("%d\n", m);
+        }
+        else if(n % 2 == 0 && m % 2 != 0)
+        {
+            printf("%d\n", n);
+        }
+        else
+        {
+            printf("%d\n", 0);
+        }
+    }
+    
+    return 0;
+}
+
+6.Balls and Boxes
+---------------
+
+#include <stdio.h>
+
+int main(void) {
+	int t;
+	scanf("%d",&t);
+	while(t--){
+	    int n,k,s;
+	    scanf(" %d %d",&n,&k);
+	    s=(k*(k+1)/2);
+	    if(s<=n){
+	        printf("Yes \n");
+	    }
+	    else{
+	        printf("No \n");
+	    }
+	}
+	return 0;
+}
+
+5.Farmer And His Plot
+--------------------
+
+#include <stdio.h>
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    else
+        return gcd(b, a % b);
+}
+int find_min_square_plots(int length, int breadth) {
+    int common_divisor = gcd(length, breadth);
+    int min_plots = (length / common_divisor) * (breadth / common_divisor);
+    return min_plots;
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+
+    for (int i = 0; i < T; ++i) {
+         int N, M;
+        scanf("%d %d", &N, &M);
+        int result = find_min_square_plots(N, M);
+        printf("%d\n", result);
+    }
+
+    return 0;
+}
+
+4.Puppy and Sum (python)
+--------------
+def sum_function(D, N):
+    if D == 1:
+        return sum(range(1, N+1))
+    else:
+        return sum_function(D-1, sum(range(1, N+1)))
+
+# Input reading
+T = int(input())
+for _ in range(T):{
+    D, N = map(int, input().split())
+    result = sum_function(D, N)
+    print(result)
+}
+
+3.Racing Horses
 ---------------------
 #include <stdio.h>
 #include <stdlib.h> 
@@ -1381,33 +1550,15 @@ int main() {
     return 0;
 }
 
-Turn It
----------
+2.Maximum Length Even Subarray 
+----------------------------
 #include <stdio.h>
-
-int main(void) {
-    int T;
-    scanf("%d", &T);
-
-    while (T--) {
-        long long U, V, A, S;
-        scanf("%lld %lld %lld %lld", &U, &V, &A, &S);
-        long long min_distance = (U * U) - (V * V);
-               if (min_distance <= 2 * A * S) {
-            printf("Yes\n");
-        } else {
-            printf("No\n");
-        }
+int max_even_subsequence_length(int N) {
+    int sequence_sum = N * (N + 1) / 2;
+    if (sequence_sum % 2 == 0) {
+        return N;
     }
-
-    return 0;
-}
-
-Distinct Pair Sums
-------------------
-#include <stdio.h>
-int count_reachable(int L, int R) {
-    return (2 * R - 2 * L) + 1;
+        return N - 1;
 }
 
 int main() {
@@ -1415,201 +1566,15 @@ int main() {
     scanf("%d", &T);
 
     for (int i = 0; i < T; i++) {
-        int L, R;
-        scanf("%d %d", &L, &R);
-        int result = count_reachable(L, R);
+        int N;
+        scanf("%d", &N);
+        int result = max_even_subsequence_length(N);
         printf("%d\n", result);
     }
-
     return 0;
 }
 
-Tom And Jerry 
-----------------
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-char* can_reach_in_k_moves(int a, int b, int c, int d, int k) {
-    int distance = abs(a - c) + abs(b - d);
-    if (distance > k || (k - distance) % 2 != 0) {
-        return "NO";
-    } else {
-        return "YES";
-    }
-}
-
-int main() {
-    int t;
-    scanf("%d", &t);
-
-    for (int i = 0; i < t; ++i) {
-        int a, b, c, d, k;
-        scanf("%d %d %d %d %d", &a, &b, &c, &d, &k);
-        char* result = can_reach_in_k_moves(a, b, c, d, k);
-        printf("%s\n", result);
-    }
-
-    return 0;
-}
-
-Alternate Additions
--------------------
-#include <stdio.h>
-
-int main() 
-{
-    int t;
-    scanf("%d", &t);
-    
-    while(t--)
-    {
-        int A,B;
-        scanf("%d %d", &A, &B);
-        int diff = B - A;
-        if ((B - A) % 3 == 0)
-        {
-            printf("Yes\n");
-        }
-        else if ((B - A)%3 == 1)
-        {
-            printf("Yes\n");
-        }
-        else
-        {
-            printf("No\n");
-        }
-    }
-    return 0;
-}
-
-The Begining Era Of Cyberverse
--------------------------------
-
-#include <stdio.h>
-
-int solve(int N, int K) {
-    return K / N;
-}
-
-int main() {
-    int T;
-    scanf("%d", &T);
-
-    for (int tc = 0; tc < T; ++tc) {
-        int N, K;
-        scanf("%d %d", &N, &K);
-
-        printf("%d\n", solve(N, K));
-    }
-
-    return 0;
-}
-
-Fill The Grid
--------------
-#include <stdio.h>
-
-int main() 
-{
-    int t;
-    scanf("%d", &t);
-    
-    while(t--)
-    {
-        int n,m;
-        scanf("%d %d", &n, &m);
-        if(n % 2 != 0 && m % 2 != 0)
-        {
-            printf("%d\n", n+m-1);
-        }
-        else if(n % 2 != 0 && m % 2 == 0)
-        {
-            printf("%d\n", m);
-        }
-        else if(n % 2 == 0 && m % 2 != 0)
-        {
-            printf("%d\n", n);
-        }
-        else
-        {
-            printf("%d\n", 0);
-        }
-    }
-    
-    return 0;
-}
-
-Balls and Boxes
----------------
-
-#include <stdio.h>
-
-int main(void) {
-	int t;
-	scanf("%d",&t);
-	while(t--){
-	    int n,k,s;
-	    scanf(" %d %d",&n,&k);
-	    s=(k*(k+1)/2);
-	    if(s<=n){
-	        printf("Yes \n");
-	    }
-	    else{
-	        printf("No \n");
-	    }
-	}
-	return 0;
-}
-
-Farmer And His Plot
---------------------
-
-#include <stdio.h>
-int gcd(int a, int b) {
-    if (b == 0)
-        return a;
-    else
-        return gcd(b, a % b);
-}
-int find_min_square_plots(int length, int breadth) {
-    int common_divisor = gcd(length, breadth);
-    int min_plots = (length / common_divisor) * (breadth / common_divisor);
-    return min_plots;
-}
-
-int main() {
-    int T;
-    scanf("%d", &T);
-
-    for (int i = 0; i < T; ++i) {
-         int N, M;
-        scanf("%d %d", &N, &M);
-        int result = find_min_square_plots(N, M);
-        printf("%d\n", result);
-    }
-
-    return 0;
-}
-
-Puppy and Sum (python)
---------------
-def sum_function(D, N):
-    if D == 1:
-        return sum(range(1, N+1))
-    else:
-        return sum_function(D-1, sum(range(1, N+1)))
-
-# Input reading
-T = int(input())
-for _ in range(T):{
-    D, N = map(int, input().split())
-    result = sum_function(D, N)
-    print(result)
-}
-
-Turbo Sort
+1.Turbo Sort
 -----------------
 Given a list of numbers, you have to sort them in non decreasing order.
 #include <stdio.h>
